@@ -1,3 +1,5 @@
+### **PART A**
+
 - **1. Perform encryption, decryption using the Caesar cipher substitution 
 techniques**
 
@@ -218,3 +220,29 @@ if __name__ == "__main__":
     plainText = vignere(key,cipherText)
     print("Plain text : ",plainText)
 ```
+
+
+### **PART B**
+
+
+- **1.**
+
+```py
+```
+
+
+- **2.**
+```py```
+
+
+- **3.**
+```py```
+
+
+- **4.Implement key generation technique used in Data Encryption Standard(DES)**
+
+```py```
+
+
+- **5.**
+```py```
