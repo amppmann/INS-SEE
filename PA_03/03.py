@@ -1,4 +1,9 @@
 # Implement Diffie-Helman Algorithm to establish a shared secret between 2 parties that can be used for secret communication to exchange data over a public network
+
+# Enter a prime number :71
+# Enter a primitive root :7
+# Enter a private key for A :12
+# Enter a private key for B :5
 import math
 
 q = int(input("Enter a prime number : "))
