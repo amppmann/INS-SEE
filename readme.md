@@ -400,7 +400,7 @@ print("Decrypted : ",decrypt(cipherText))
 ```
 
 
-- **3.**
+- **3. Perform encryption, decryption using the Playfair cipher substitution techniques**
 ```py
 
 
