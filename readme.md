@@ -458,49 +458,48 @@ for i in range(0,8):
     keys.append(newAnswer)
 
 for i in range(0,len(keys)):
-    print("Key ",i+1," = ",keys[i])```
+    print("Key ",i+1," = ",keys[i])
 ```
 
 - **5.Implement encryption & decryption using RSA**
 ```py
-import math
+
 
 def gcd(a,b):
-    temp = 0
+    while b:
+        a,b = b,a%b
+    return a
+
+
+def RSA(p,q,msg):
+    n = p*q
+    phi = (p-1)*(q-1)
+
+    for i in range(2,phi):
+        if(gcd(i,phi)==1):
+            e = i
+            break
+        
+    j = 0
     
-    while(b!=0):
-        temp = a%b
-        if(temp==0):
-            return b
-        a = b
-        b = temp
+    while True:
+        if(j*e%phi) == 1:
+            d = j
+            break
+        j+=1
         
-p = 3
-q = 7
-n = p*q
-e = 2
-pi = (p-1)*(q-1)
+    c = (msg**e)%n
 
-while(e<pi):
-    if(gcd(e,pi)==1):
-        break
-    else:
-        e+=1
-        
-        
-k  =2
-d = (1+(pi*k))/e
-msg = 12.0
+    print("Encrypted message : ",c)
 
-print("Message data : ",msg)
-
-c = pow(msg,e)
-c = math.fmod(c,n)
-print("Encrypted data : ",c)
-
-m = pow(c,d)
-m = math.fmod(m,n)
-print("Original message data : ",m)
+    d = (c**d)%n
+    
+    print("Decrypted message : ",d)
 
 
+p = int(input("Enter the value of p :"))
+q = int(input("Enter the value of q :"))
+msg = int(input("Emter a message :"))
+
+RSA(p,q,msg)
 ```
