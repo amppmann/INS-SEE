@@ -1,6 +1,4 @@
 # Implement key generation process using ECC(Elliptic curve cryptographic) function
-
-
 import tinyec
 from tinyec import registry
 import secrets
@@ -12,11 +10,16 @@ def compress_point(point):
     return hex(point.x) + hex(point.y % 2)[2:]
 
 
-def getEnKey(pubKey):
+def getEnKey(publicKey):
     ciPrivateKey = secrets.randbelow(curve.field.n)
     ciPublicKey = ciPrivateKey * curve.g
-    enKey = ciPublicKey * ciPrivateKey
+    enKey = publicKey * ciPrivateKey
     return (enKey, ciPublicKey)
+
+
+def ECC_Decryption_key(privateKey,ciPublicKey):
+    sharedECCKey = ciPublicKey*privateKey
+    return sharedECCKey
 
 
 senderPrivateKey = secrets.randbelow(curve.field.n)
@@ -33,15 +36,20 @@ print("Sender's ciphertext public key : ", compress_point(ciPublicKeySender))
 print("Sender's encryption key : ", compress_point(enKeySender))
 print("\n")
 
-receiverPrivateKey = secrets.randbelow(curve.field.n)
-receiverPublicKey = receiverPrivateKey * curve.g
+
+sharedECCKeySender = ECC_Decryption_key(senderPrivateKey,ciPublicKeySender)
+
+print("Sender's Decryption key : ",compress_point(sharedECCKeySender))
+
+# receiverPrivateKey = secrets.randbelow(curve.field.n)
+# receiverPublicKey = receiverPrivateKey * curve.g
 
 
-print("Receiver's private key : ",hex(receiverPrivateKey))
-print("Receiver's public key :",compress_point(receiverPublicKey))
+# print("Receiver's private key : ",hex(receiverPrivateKey))
+# print("Receiver's public key :",compress_point(receiverPublicKey))
 
-print("\n")
-(enKeyReceiver,ciPublicKeyReceiver) = getEnKey(receiverPublicKey)
+# print("\n")
+# (enKeyReceiver,ciPublicKeyReceiver) = getEnKey(receiverPublicKey)
 
-print("Receiver's ciphertext public key : ",compress_point(ciPublicKeyReceiver))
-print("Receiver encryption key : ",compress_point(enKeyReceiver))
+# print("Receiver's ciphertext public key : ",compress_point(ciPublicKeyReceiver))
+# print("Receiver encryption key : ",compress_point(enKeyReceiver))
