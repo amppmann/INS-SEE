@@ -1,4 +1,3 @@
-
 def gcd(a,b):
     
     while b:
@@ -6,9 +5,7 @@ def gcd(a,b):
     return a
 
 
-
 def RSA(p,q,msg):
-    
     n = p*q
     phi = (p-1)*(q-1)
 
@@ -25,16 +22,24 @@ def RSA(p,q,msg):
         if(j*e%phi)==1:
             d = j
             break
-        j=j+1
         
+        j+=1
+        
+    
     c = (msg**e)%n
 
     print("Encrypted message : ",c)
 
-    d = (c**d)%n
+    d = (c ** d)%n
+
     print("Decrypted message : ",d)
 
-p = int(input("Enter value of p :"))
-q = int(input("Enter value of q :"))
-msg = int(input("Enter the message :"))
+
+
+p = int(input("Enter p :"))
+q = int(input("Enter q :"))
+msg = int(input("Enter msg :"))
+
+
 RSA(p,q,msg)
+
