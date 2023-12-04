@@ -290,53 +290,64 @@ if __name__ == "__main__":
 # Fiestel cipher
 
 
-s = input("Enter a string : ")
+result = ""
+key = ""
 
 
-# This will convert string to ASCII--> then to 8-bit binary
-result = "".join(format(ord(i),'08b') for i in s)
-
-
-print("Result : ",result)
+s = input("Enter String: ")
+for ch in s:
+    result += format(ord(ch), "08b")
 
 l = int(len(result)/2)
+
 
 left = result[:l]
 right = result[l:]
 
+k = input("Enter key: ")
 
-k = input("Enter a key : ")
-key = "".join(format(ord(i),'08b') for i in k)
-s = bin(int(right,2)+int(key,2))
-answer = bin(int(s[2:],2)^int(left,2))
 
-newr= answer[2:]
+for ch in k:
+    key += format(ord(ch), "08b")
+    
+print("Key: " + key)
+
+
+
+s = bin(int(right, 2) + int(key, 2))
+answer = bin(int(s[2:], 2) ^ int(left, 2))
+
 newl = right
+newr = answer[2:]
 
+newl, newr = newr, newl
 
-newr,newl = newl,newr
+s = bin(int(newr, 2) + int(key, 2))
+ans = bin(int(s[2:], 2) ^ int(newl, 2))
 
-s= bin(int(newr,2)+int(key,2))
-ans = bin(int(s[2:],2) ^ int(newl,2))
 nl = newr
-
 nr = ans[2:]
-nl,nr = nr,nl
-cipher = nl+nr
+nl, nr = nr, nl
 
-if(len(cipher)!=len(result)):
-    while(len(cipher)!=len(result)):
-        cipher="0"+cipher
+cipher = nl + nr
 
-print(cipher)
+if len(cipher) != len(result):
+    while len(cipher) != len(result):
+        cipher = "0" + cipher
+
+
+print("CipherText is: " + cipher)
 
 plainText = ""
-for i in range(0,len(cipher),8):
-    temp = cipher[i:i+8]
-    d = int(temp,2)
-    plainText=plainText+chr(d)
-    
-print(plainText)
+
+
+for i in range(0, len(cipher), 8):
+    temp = cipher[i : i + 8]
+    d = int(temp, 2)
+    plainText = plainText+ chr(d)
+
+
+print("Decrypted Text is: " + plainText)
 ```
 
 
